@@ -5,7 +5,7 @@ metadata:
   
 
 spec:
-  replicas: 3
+  replicas: 1
   selector:              # component it is going to manage
     matchLabels:
       component: web
@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: webapp:1
-        imagePullPolicy: Never
+        image: sudeep254/python-redis-postgres:1 
         ports:
           - containerPort: 9000
         env:
@@ -35,7 +34,8 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: pgpassword
-              key: PGPASSWORD
+                key: POSTGRES_PASSWORD
+            
 
   
 

@@ -10,12 +10,14 @@ spec:
   template:
     metadata:
       labels: 
-        component: postres 
+        component: postgres 
     spec:
       volumes:
         - name: postgres-storage
-          persistantVolumeClaim:
-            claimName: database-persistant-volume-claim        
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim
+      
+
       containers:
       - name: postgres
         image: postgres:alpine
@@ -26,8 +28,8 @@ spec:
             mountPath: /var/lib/postgresql/data   # the directory inside postgres to backup
             subPath: postgres  # any data stored inside the mount is going to be stored in folder postgres inside persistent volume claim
         env:
-          - name: PGPASSWORD
+          - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: pgpassword
-                key: PGPASSWORD
+                key: POSTGRES_PASSWORD

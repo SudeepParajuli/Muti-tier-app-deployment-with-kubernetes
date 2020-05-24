@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Deployment
+  name: redis
   
 spec:
   replicas: 1
   selector:
-    matchLabel:
+    matchLabels:
       component: redis
   template:
     metadata:
@@ -16,6 +16,6 @@ spec:
       containers:
       - name: redis
         image: redis:alpine
-        imagePullPolicy: Never
+        #imagePullPolicy: Never
         ports:
           - containerPort: 6379
