@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+  
+
+spec:
+  replicas: 3
+  selector:              # component it is going to manage
+    matchLabels:
+      component: web
+  template:              # is how deployment gonna identify different pods it is going to manage
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+      - name: client
+        image: webapp:1
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 9000
+        env:
+          - name: REDIS_HOST
+            value: redis-cluster-ip-service
+          - name: REDIS_PORT
+            value: '6379'
+          - name: POSTGRES_DB
+            value: postgres-cluster-ip-service 
+          - name: POSTGRES_PORT
+            value: '5432'
+          - name: DB_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: pgpassword
+              key: PGPASSWORD
+
+  
+
+      
