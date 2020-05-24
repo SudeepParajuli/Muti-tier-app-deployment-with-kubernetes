@@ -1,0 +1,28 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: web_app_container
+    
+  redis:
+    image: "redis"
+    container_name: redis_container
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.nginx
+    container_name: nginx_container
+    ports:
+      - "5001:80"
+    restart: always
+    
+    command: [nginx-debug, '-g', 'daemon off;']
+
+
+
+    
+
+
+
+
