@@ -1,5 +1,11 @@
-FROM python:3.4-alpine
-ADD . /code
-WORKDIR /code
-RUN pip install -r requirements.txt
-CMD ["python", "app.py"]
+from python:slim
+RUN groupadd flaskgroup && useradd -m -g flaskgroup -s /bin/bash flask
+RUN echo "flask ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN mkdir -p /home/flask/app/web
+WORKDIR /home/flask/app/web
+COPY . /home/flask/app/web
+RUN pip install --no-cache-dir -r requirements.txt
+RUN chown -R flask:flaskgroup /home/flask
+USER flask
+CMD ["python", "linode.py"]
+#ENTRYPOINT ["/usr/local/bin/gunicorn", "--bind", ":8000", "linode:app", "--reload", "--workers", "16"]
