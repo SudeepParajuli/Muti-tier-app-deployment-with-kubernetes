@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-persistent-volume-claim
+  labels:
+    name: database-persistent-volume-claim
+  
+  #annotations:
+    #volume.beta.kubernetes.io/storage-class: standard
+spec:
+  storageClassName: manual
+  # The metadata.name field from the PersistentVolume to match
+  
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      # The amount of the volume's storage to request
+      storage: 2Gi
+
+  selector:
+    matchLabels:
+      name: database-persistent-volume-claim

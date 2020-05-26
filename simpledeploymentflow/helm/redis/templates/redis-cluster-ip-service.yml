@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-cluster-ip-service
+  
+spec:
+  type: ClusterIP # ClusterIP|LoadBalancer
+  selector:
+    component: redis     # what it is going to manage
+  
+  ports:
+    - port: 6379          # this is for port redirection .. any traffic comming in this service in port 6379 will be redirected to 6379 inside redis
+      targetPort: 6379
+      
