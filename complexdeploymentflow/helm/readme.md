@@ -5,4 +5,4 @@
  helm install redis ./redis
  kubectl get pods
 
-helm create postgres
+ helm create postgres
