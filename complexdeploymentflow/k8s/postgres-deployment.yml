@@ -20,7 +20,7 @@ spec:
 
       containers:
       - name: postgres
-        image: postgres:alpine
+        image: sudeep254/postgres-alpine
         ports:
           - containerPort: 5432
         volumeMounts:
@@ -28,6 +28,14 @@ spec:
             mountPath: /var/lib/postgresql/data   # the directory inside postgres to backup
             subPath: postgres  # any data stored inside the mount is going to be stored in folder postgres inside persistent volume claim
         env:
+          - name: POSTGRES_DB
+            value: linode
+          - name: POSTGRES_HOST
+            value: postgres-cluster-ip-service
+          - name: POSTGRES_PORT
+            value: '5432'
+          - name: DB_USER
+            value: postgres
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:

@@ -16,16 +16,18 @@ spec:
     spec:
       containers:
       - name: client
-        image: sudeep254/python-redis-postgres:1 
+        image: sudeep254/python-redis-postgres:latest 
         ports:
-          - containerPort: 9000
+          - containerPort: 8000
         env:
           - name: REDIS_HOST
             value: redis-cluster-ip-service
           - name: REDIS_PORT
             value: '6379'
           - name: POSTGRES_DB
-            value: postgres-cluster-ip-service 
+            value: linode
+          - name: POSTGRES_HOST
+            value: postgres-cluster-ip-service
           - name: POSTGRES_PORT
             value: '5432'
           - name: DB_USER
