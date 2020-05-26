@@ -1,7 +1,7 @@
 # Muti-tier-app-deployment-with-kubernetes
 Deployment pipeline for a simple multi tier application 
 
-# Installation for xenial/bionic
+## Installation for xenial/bionic
 
 ## Both worker and master node 
 
